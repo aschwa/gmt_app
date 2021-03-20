@@ -17,7 +17,7 @@ data_load_state.text('Loading States...Done!')
 
 
 ## User Options
-state_def = st.sidebar.selectbox('Select state components or definition:', df.columns)
+state_def = st.sidebar.selectbox('Select state components or definition:', df.columns[3:])
 system_type = st.sidebar.selectbox('Select prairie type:', ['All'] + list(set(df.system_type.values)))
 min_year=min(df.survey_year); max_year=max(df.survey_year)
 start_year, end_year = st.sidebar.slider('Select year range', min_value=min_year, max_value=max_year,value=(min_year,max_year), step=1)
