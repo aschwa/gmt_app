@@ -42,6 +42,7 @@ counts.sort_index(inplace=True)
 st.subheader('Counts for years {} to {} for {} system types\n Includes {} surveys'.format(start_year,end_year,system_type,sum(counts)))
 st.write(counts)
 st.bar_chart(counts)
+st.text('Counts of {}'.format(state_def.replace('_', ' ').title()))
 
 #st.write(df[['state']].values_counts())
 #st.bar_chart(hist_values)
