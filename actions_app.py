@@ -10,7 +10,7 @@ def load_data():
 
 
 # Add a title
-st.title('Explore GMT Action-States')
+st.title('Explore GMT Action-States on Transect Surveys')
 # Load Data
 data_load_state = st.text('Loading Actions and States')
 df = load_data()
@@ -31,7 +31,13 @@ start_year, end_year = st.sidebar.slider('Select year range', min_value=min_year
 df_in_range = df.loc[df['survey_year'].between(start_year,end_year)]
 
 ####
-st.subheader("Relative counts of actions given state")
+st.subheader("Counts of actions given state/component: {}".format(state_def))
+tab = pd.crosstab( df_in_range[state_def],df_in_range.action,margins=True)
+#tab_blue = tab.background_gradient(cmap='Blues')
+st.write(tab)
+
+####
+st.subheader("Normalized counts  of actions given state/component: {}".format(state_def))
 tab = pd.crosstab( df_in_range[state_def],df_in_range.action,margins=False, normalize='index')
 tab_blue = tab.style.format("{:.2}").background_gradient(cmap='Blues')
 st.write(tab_blue)
@@ -51,5 +57,5 @@ counts.sort_index(inplace=True)
 st.subheader('Counts for years {} to {} for {} action\n Includes {} surveys'.format(start_year,end_year,action_type,sum(counts)))
 st.write(counts)
 st.bar_chart(counts)
-st.text('Counts of {}'.format(state_def.replace('_', ' ').title()))
+#st.text('Counts of {}'.format(state_def.replace('_', ' ').title()))
 
